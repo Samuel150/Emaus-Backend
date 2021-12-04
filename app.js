@@ -6,6 +6,7 @@ const courseRoute = require('./routes/course.route')
 const countryRoute = require('./routes/country.route')
 const departmentRoute = require('./routes/deparment.route')
 const cityRoute = require('./routes/city.route')
+
 //settings
 const app = express()
 app.set('port', process.env.PORT||3000)
@@ -20,6 +21,6 @@ app.use('/cycle',cycleRoute);
 app.use('/course',courseRoute)
 app.use('/country',countryRoute)
 app.use('/department',departmentRoute)
-app.use('./city',cityRoute)
+app.use('/city',cityRoute)
 
 module.exports = app;
