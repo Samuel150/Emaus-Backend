@@ -141,7 +141,7 @@ db.createCollection("country",{
         }
     }
 })
-db.createCollection("city",{
+db.createCollection("department",{
     validator:{
         $jsonSchema:{
             bsonType:"object",
@@ -149,7 +149,25 @@ db.createCollection("city",{
             properties:{
                 countryId:{
                     bsonType:"objectId",
-                    description:"city countryId is of type objectId and it's required"
+                    description:"department countryId is of type objectId and it's required"
+                },
+                name:{
+                    bsonType:"string",
+                    description:"department name is of type string and it's required"
+                },
+            }
+        }
+    }
+})
+db.createCollection("city",{
+    validator:{
+        $jsonSchema:{
+            bsonType:"object",
+            required:["departmentId","name"],
+            properties:{
+                departmentId:{
+                    bsonType:"objectId",
+                    description:"city departmentId is of type objectId and it's required"
                 },
                 name:{
                     bsonType:"string",
@@ -164,44 +182,82 @@ db.country.insert({
     name:"Bolivia",
 })
 //ObjectId("61a553c33b8bbd2ede7ba06f") BoliviaId
-db.city.insert({
+db.department.insert({
     name:"La Paz",
     countryId:ObjectId("61a553c33b8bbd2ede7ba06f")
 })
+//61a5548a3b8bbd2ede7ba070
+db.city.find({departmentId:ObjectId("61a5548a3b8bbd2ede7ba070")}).pretty()
 db.city.insert({
+    name:"La Paz",
+    departmentId:ObjectId("61a5548a3b8bbd2ede7ba070")
+})
+db.city.insert({
+    name:"El Alto",
+    departmentId:ObjectId("61a5548a3b8bbd2ede7ba070")
+})
+db.city.insert({
+    name:"Viacha",
+    departmentId:ObjectId("61a5548a3b8bbd2ede7ba070")
+})
+db.department.insert({
     name:"Cochabamba",
     countryId:ObjectId("61a553c33b8bbd2ede7ba06f")
 })
+//61a5548b3b8bbd2ede7ba071
+db.city.find({departmentId:ObjectId("61a5548b3b8bbd2ede7ba071")}).pretty()
 db.city.insert({
+    name:"Cochabamba",
+    departmentId:ObjectId("61a5548b3b8bbd2ede7ba071")
+})
+db.city.insert({
+    name:"Quillacollo",
+    departmentId:ObjectId("61a5548b3b8bbd2ede7ba071")
+})
+db.department.insert({
     name:"Santa Cruz",
     countryId:ObjectId("61a553c33b8bbd2ede7ba06f")
 })
+//61a5548b3b8bbd2ede7ba072
+db.city.find({departmentId:ObjectId("61a5548b3b8bbd2ede7ba072")}).pretty()
 db.city.insert({
+    name:"Santa Cruz",
+    departmentId:ObjectId("61a5548b3b8bbd2ede7ba072")
+})
+db.city.insert({
+    name:"Camiri",
+    departmentId:ObjectId("61a5548b3b8bbd2ede7ba072")
+})
+db.city.insert({
+    name:"Montero",
+    departmentId:ObjectId("61a5548b3b8bbd2ede7ba072")
+})
+db.department.insert({
     name:"Oruro",
     countryId:ObjectId("61a553c33b8bbd2ede7ba06f")
 })
-db.city.insert({
+db.department.insert({
     name:"Potosi",
     countryId:ObjectId("61a553c33b8bbd2ede7ba06f")
 })
-db.city.insert({
+db.department.insert({
     name:"Tarija",
     countryId:ObjectId("61a553c33b8bbd2ede7ba06f")
 })
-db.city.insert({
+db.department.insert({
     name:"Sucre",
     countryId:ObjectId("61a553c33b8bbd2ede7ba06f")
 })
-db.city.insert({
+db.department.insert({
     name:"Pando",
     countryId:ObjectId("61a553c33b8bbd2ede7ba06f")
 })
-db.city.insert({
+db.department.insert({
     name:"Beni",
     countryId:ObjectId("61a553c33b8bbd2ede7ba06f")
 })
 //all Bolivia cities
-db.city.find({countryId:ObjectId("61a553c33b8bbd2ede7ba06f")})
+db.department.find({countryId:ObjectId("61a553c33b8bbd2ede7ba06f")})
 
 
 db.cycle.insert({
