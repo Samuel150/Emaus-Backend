@@ -37,5 +37,11 @@ const StudentSchema = new Schema({
     },
     email:{
         type:String,
+    },
+    registerDate:{
+        type:Date,
+        default:new Date()
     }
-})
+},{collection:'student',versionKey:false})
+
+module.exports = model('student', StudentSchema)
