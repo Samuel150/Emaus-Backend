@@ -20,5 +20,22 @@ const StudentSchema = new Schema({
     documentNumber:{
         type:String,
     },
-    
+    countryId:{
+        type:Schema.ObjectId,
+        required:true,
+    },
+    departmentId:{
+        type:Schema.ObjectId,
+        required:true,
+    },
+    cityId:{
+        type:Schema.ObjectId,
+        required:true,
+    },
+    churchId:{
+        type:Schema.ObjectId,
+    },
+    email:{
+        type:String,
+    }
 })

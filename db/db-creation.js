@@ -3,39 +3,47 @@ db.createCollection("student",{
     validator:{
         $jsonSchema:{
             bsonType:"object",
-            required:["names","lastNames","address","telephone","cityId","countryId"],
+            required:["names","lastNames","address","telephone","departmentId","countryId"],
             properties:{
                 names:{
                     bsonType:"string",
-                    description:"user names is of type string and it's required"
+                    description:"student names is of type string and it's required"
                 },
                 lastNames:{
                     bsonType:"string",
-                    description:"user lastNames is of type string and it's required"
-                },
-                telephone:{
-                    bsonType:"int",
-                    description:"user telephone is of type int and it's required"
+                    description:"student lastNames is of type string and it's required"
                 },
                 address:{
                     bsonType:"string",
-                    description:"user address is of type string and it's required"
+                    description:"student address is of type string and it's required"
                 },
-                cityId:{
-                    bsonType:"objectId",
-                    description:"user city is of type objectId and it's required"
+                telephone:{
+                    bsonType:"int",
+                    description:"student telephone is of type int and it's required"
+                },
+                documentNumber:{
+                    bsonType:"string",
+                    description:"student documentNumber is of type int"
                 },
                 countryId:{
                     bsonType:"objectId",
-                    description:"user country is of type objectId and it's required"
+                    description:"student country is of type objectId and it's required"
                 },
-                church:{
-                    bsonType:"string",
-                    description:"user church is of type string"
+                departmentId:{
+                    bsonType:"objectId",
+                    description:"student departmentId is of type objectId and it's required"
+                },
+                cityId:{
+                    bsonType:"objectId",
+                    description:"student city is of type objectId"
+                },
+                churchId:{
+                    bsonType:"objectId",
+                    description:"student church is of type objectId"
                 },
                 email:{
                     bsonType:"string",
-                    description:"user email is of type string"
+                    description:"student email is of type string"
                 },
             }
         }
@@ -177,7 +185,30 @@ db.createCollection("city",{
         }
     }
 })
+db.createCollection("church",{
+    validator:{
+        $jsonSchema:{
+            bsonType:"object",
+            required:["name"],
+            properties:{
+                name:{
+                    bsonType:"string",
+                    description:"church name is of type string and it's required"
+                },
+            }
+        }
+    }
+})
 //// INSERTS
+db.church.insert({
+    name:"La Comunidad"
+})
+db.church.insert({
+    name:"Almirante Grau"
+})
+db.church.insert({
+    name:"Dios es Amor"
+})
 db.country.insert({
     name:"Bolivia",
 })
@@ -350,9 +381,11 @@ db.student.insert({
     lastNames:"Huanca Condorino",
     address:"Obrajes c/21",
     telephone:NumberInt(27866774),
-    cityId:ObjectId("61a5548a3b8bbd2ede7ba070"),
+    documentNumber:"150150150",
     countryId:ObjectId("61a553c33b8bbd2ede7ba06f"),
-    church:"La Comunidad",
+    departmentId:ObjectId("61a5548a3b8bbd2ede7ba070"),
+    cityId:ObjectId("61aacb4f53396432c91d2566"),
+    churchId:ObjectId("61aacf6630117d6d99f1ffb4"),
     email:"hsamueljackson4@gmail.com",
     registerDate:new Date()
 })
@@ -362,9 +395,11 @@ db.student.insert({
     lastNames:"Condorino Duran",
     address:"Obrajes c/21",
     telephone:NumberInt(2782726),
-    cityId:ObjectId("61a5548a3b8bbd2ede7ba070"),
+    documentNumber:"160160160",
     countryId:ObjectId("61a553c33b8bbd2ede7ba06f"),
-    church:"La Comunidad",
+    departmentId:ObjectId("61a5548a3b8bbd2ede7ba070"),
+    cityId:ObjectId("61aacb4f53396432c91d2566"),
+    churchId:ObjectId("61aacf6630117d6d99f1ffb4"),
     email:"soniamarcia@gmail.com",
     registerDate:new Date()
 })
@@ -373,36 +408,37 @@ db.student.insert({
     lastNames:"Condorino Duran",
     address:"Septimo anillo",
     telephone:NumberInt(2782726),
-    cityId:ObjectId("61a5548b3b8bbd2ede7ba072"),
     countryId:ObjectId("61a553c33b8bbd2ede7ba06f"),
-    church:"El Jordan",
-    email:"claudiacd@gmail.com",
+    departmentId:ObjectId("61a5548b3b8bbd2ede7ba072"),
+    cityId:ObjectId("61aacb6653396432c91d256d"),
+    churchId:ObjectId("61aacf6630117d6d99f1ffb4"),
+    email:"soniamarcia@gmail.com",
     registerDate:new Date()
 })
 //students from la paz
-db.student.find({cityId:ObjectId("61a5548a3b8bbd2ede7ba070")}).pretty()
+db.student.find({departmentId:ObjectId("61a5548a3b8bbd2ede7ba070")}).pretty()
 //students from santa cruz
-db.student.find({cityId:ObjectId("61a5548b3b8bbd2ede7ba072")}).pretty()
+db.student.find({departmentId:ObjectId("61a5548b3b8bbd2ede7ba072")}).pretty()
 //course records
 //marcia
 db.course_record.insert({
-    studentId:ObjectId("61a557573b8bbd2ede7ba084"),
+    studentId:ObjectId("61aad2aa07a49d603f30f779"),
     courseId:ObjectId("61a556633b8bbd2ede7ba07b"),
     deliveryDate:new Date()
 })
 //samu
 db.course_record.insert({
-    studentId:ObjectId("61a557573b8bbd2ede7ba085"),
+    studentId:ObjectId("61aad2aa07a49d603f30f778"),
     courseId:ObjectId("61a556633b8bbd2ede7ba07b"),
     deliveryDate:new Date()
 })
 db.course_record.insert({
-    studentId:ObjectId("61a557573b8bbd2ede7ba085"),
+    studentId:ObjectId("61aad2aa07a49d603f30f778"),
     courseId:ObjectId("61a556633b8bbd2ede7ba07c"),
     deliveryDate:new Date()
 })
 db.course_record.insert({
-    studentId:ObjectId("61a557573b8bbd2ede7ba085"),
+    studentId:ObjectId("61aad2aa07a49d603f30f778"),
     courseId:ObjectId("61a5566d3b8bbd2ede7ba081"),
     deliveryDate:new Date()
 })
@@ -415,11 +451,11 @@ db.course_record.find()
 
 //samu
 //todos los cursos de samu
-db.course_record.aggregate([{$match:{studentId:ObjectId("61a557573b8bbd2ede7ba085")}},{$lookup:{from:"course",localField:"courseId",foreignField:"_id",as:"course"}}]).pretty()
+db.course_record.aggregate([{$match:{studentId:ObjectId("61aad2aa07a49d603f30f778")}},{$lookup:{from:"course",localField:"courseId",foreignField:"_id",as:"course"}}]).pretty()
 //todos los cursos del ciclo 1 de samu
-db.course_record.aggregate([{$match:{studentId:ObjectId("61a557573b8bbd2ede7ba085")}},{$lookup:{from:"course",localField:"courseId",foreignField:"_id",as:"course"}},{$match:{"course.cycleId":ObjectId("61a555083b8bbd2ede7ba079")}}]).pretty()
+db.course_record.aggregate([{$match:{studentId:ObjectId("61aad2aa07a49d603f30f778")}},{$lookup:{from:"course",localField:"courseId",foreignField:"_id",as:"course"}},{$match:{"course.cycleId":ObjectId("61a555083b8bbd2ede7ba079")}}]).pretty()
 //todos los cursos del ciclo 2 de samu
-db.course_record.aggregate([{$match:{studentId:ObjectId("61a557573b8bbd2ede7ba085")}},{$lookup:{from:"course",localField:"courseId",foreignField:"_id",as:"course"}},{$match:{"course.cycleId":ObjectId("61a555093b8bbd2ede7ba07a")}}]).pretty()
+db.course_record.aggregate([{$match:{studentId:ObjectId("61aad2aa07a49d603f30f778")}},{$lookup:{from:"course",localField:"courseId",foreignField:"_id",as:"course"}},{$match:{"course.cycleId":ObjectId("61a555093b8bbd2ede7ba07a")}}]).pretty()
 //todos los cursos de marcia
-db.course_record.aggregate([{$match:{studentId:ObjectId("61a557573b8bbd2ede7ba084")}},{$lookup:{from:"course",localField:"courseId",foreignField:"_id",as:"course"}}]).pretty()
+db.course_record.aggregate([{$match:{studentId:ObjectId("61aad2aa07a49d603f30f779")}},{$lookup:{from:"course",localField:"courseId",foreignField:"_id",as:"course"}}]).pretty()
 
